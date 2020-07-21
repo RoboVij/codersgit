@@ -1,16 +1,16 @@
 export default {
-  Navbar: {
+  CoderStats: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "#eceff1",
     height: "6vh",
   },
-  navitem: {
+  logo: {
     marginRight: "15px",
     padding: "0 13px",
     fontSize: "22px",
-    // fontFamily: "Roboto",
+    backgroundColor: "#eceff1",
+    fontFamily: "Roboto",
     height: "100%",
     display: "flex",
     alignItems: "center",
@@ -18,9 +18,5 @@ export default {
       textDecoration: "none",
       color: "black",
     },
-  },
-  logo: {
-    fontFamily: "Courier New",
-    fontSize: "18px",
   },
 };

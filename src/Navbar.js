@@ -12,8 +12,19 @@ class Navbar extends Component {
       //     <Link to="/palette/new">Create Palette</Link>
       //   </nav>
       <header className={classes.Navbar}>
-        <div className={classes.logo}>
-          <Link to="/">coders-git.DEMO</Link>
+        <div className={classes.navitem}>
+          <Link to="/" className={classes.logo}>
+            coders-git.DEMO
+          </Link>
+        </div>
+        <div className={classes.navitem}>
+          <Link to="/news">News</Link>
+        </div>
+        <div className={classes.navitem}>
+          <Link to="/trending">Trending</Link>
+        </div>
+        <div className={classes.navitem}>
+          <Link to="/coderstats">CoderStats</Link>
         </div>
       </header>
     );
