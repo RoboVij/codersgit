@@ -11,7 +11,7 @@ class Home extends Component {
         <h1 className={classes.logo}>coders-git.DEMO</h1>
         <div className={classes.container}>
           <p>
-            Welcome! Check out the latest news, trending repos of github and
+            Welcome! Check out the latest news, trending repos of GitHub and
             it's coder stats.
           </p>
           <div className={classes.items}>

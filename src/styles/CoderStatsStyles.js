@@ -11,11 +11,10 @@ const styles = {
   },
   logo: {
     fontFamily: "Courier New",
-    // marginTop: "100px",
-    fontSize: "18px",
-    // fontFamily: "Roboto",
+    marginTop: "50px",
+    fontSize: "8px",
+    // fontFamily: "Ubuntu",
     height: "100%",
-    // display: "flex",
     alignItems: "center",
     "& a": {
       textDecoration: "none",
@@ -27,32 +26,34 @@ const styles = {
     textAlign: "center",
     position: "absolute",
     left: "50%",
-    top: "30%",
+    top: "33%",
     transform: "translate(-50%, -50%)",
-    borderRadius: "3%",
+    borderRadius: "2%",
+    height: "100px",
     backgroundColor: "#eceff1",
     margin: "20px",
-
     "&:hover": {
       backgroundColor: "#bcc1c4",
     },
   },
-  searchIcon: {
-    // padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    // pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  button: {
+    width: "150px",
+    height: "40%",
+    fontFamily: "Ubuntu",
+    position: "relative",
+    left: "7%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
   },
   inputRoot: {
     color: "inherit",
   },
   inputInput: {
     paddingLeft: "30px",
-    // padding: "50px",
+    width: "700px",
+    textAlign: "center",
     fontSize: "30px",
+    fontFamily: "Ubuntu",
   },
 };
 

@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "./styles/CoderStatsStyles";
+import Button from "@material-ui/core/Button";
 
 class CoderStats extends Component {
   render() {
@@ -14,9 +15,6 @@ class CoderStats extends Component {
           <h1>CoderStats</h1>
         </div>
         <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
           <InputBase
             placeholder="GitHub user name or organisation"
             classes={{
@@ -25,6 +23,14 @@ class CoderStats extends Component {
             }}
             inputProps={{ "aria-label": "search" }}
           />
+          <Button
+            variant="contained"
+            color="default"
+            className={classes.button}
+            startIcon={<SearchIcon />}
+          >
+            Get Stats
+          </Button>
         </div>
       </header>
     );

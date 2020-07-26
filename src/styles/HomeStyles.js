@@ -24,7 +24,6 @@ export default {
   items: {
     display: "block",
     fontSize: "30px",
-    // fontFamily: "Roboto",
     height: "100%",
     width: "60%",
     justifyContent: "center",
