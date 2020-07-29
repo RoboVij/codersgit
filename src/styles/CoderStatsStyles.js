@@ -44,6 +44,10 @@ const styles = {
     left: "7%",
     top: "50%",
     transform: "translate(-50%, -50%)",
+    "& a": {
+      textDecoration: "none",
+      color: "inherit",
+    },
   },
   inputRoot: {
     color: "inherit",

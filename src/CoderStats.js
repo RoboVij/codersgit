@@ -1,12 +1,33 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "axios";
 import styles from "./styles/CoderStatsStyles";
 import Button from "@material-ui/core/Button";
+const API_URL = "https://api.github.com/users/praveen7557";
 
 class CoderStats extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { userFound: null };
+    this.gatherData = this.gatherData.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
+  }
+  async gatherData(evt) {
+    let res = await axios.get(API_URL);
+    console.log(res.data);
+    // this.state.userFound = res.data.message;
+    // this.setState({ userFound: userFound });
+  }
+  handleClick = () => {
+    // this.gatherData();
+    // if (this.state.userFound) {
+    // return <Redirect to="/coderstats/stats" />;
+    this.props.history.push(`/coderstats/stats`);
+    // }
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -28,8 +49,11 @@ class CoderStats extends Component {
             color="default"
             className={classes.button}
             startIcon={<SearchIcon />}
+            // onSubmit={this.handleClick}
+            onClick={this.gatherData}
           >
-            Get Stats
+            <Link to="/coderstats/stats">Get Stats</Link>
+            {/* Get Stats */}
           </Button>
         </div>
       </header>

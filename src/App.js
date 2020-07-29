@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Navbar from "./Navbar";
 import News from "./News";
 import Home from "./Home";
+import Stats from "./Stats";
 import Trending from "./Trending";
 import CoderStats from "./CoderStats";
 import "./App.css";
@@ -36,6 +37,15 @@ class App extends Component {
           render={(routeProps) => (
             <div className="page">
               <CoderStats />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/coderstats/stats"
+          render={(routeProps) => (
+            <div className="page">
+              <Stats />
             </div>
           )}
         />
