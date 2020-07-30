@@ -11,13 +11,17 @@ const API_URL = "https://api.github.com/users/praveen7557";
 class CoderStats extends Component {
   constructor(props) {
     super(props);
-    this.state = { userFound: null };
+    this.state = { userFound: null, res: null };
     this.gatherData = this.gatherData.bind(this);
     // this.handleClick = this.handleClick.bind(this);
   }
+  componentDidMount() {}
   async gatherData(evt) {
-    let res = await axios.get(API_URL);
-    console.log(res.data);
+    await axios.get(API_URL).then((result) =>
+      this.setState({
+        res: result.data,
+      })
+    );
     // this.state.userFound = res.data.message;
     // this.setState({ userFound: userFound });
   }
@@ -30,6 +34,8 @@ class CoderStats extends Component {
   };
   render() {
     const { classes } = this.props;
+    const { data } = this.state;
+    console.log(data);
     return (
       <header className={classes.CoderStats}>
         <div className={classes.logo}>
@@ -52,7 +58,10 @@ class CoderStats extends Component {
             // onSubmit={this.handleClick}
             onClick={this.gatherData}
           >
-            <Link to="/coderstats/stats">Get Stats</Link>
+            <p>{data}</p>
+            <Link data={data} to="/coderstats/stats">
+              Get Stats
+            </Link>
             {/* Get Stats */}
           </Button>
         </div>

@@ -19,4 +19,7 @@ export default {
       color: "black",
     },
   },
+  info: {},
+  profileInfo: {},
+  statsInfo: {},
 };

@@ -11,10 +11,10 @@ class Stats extends Component {
         <div className={classes.logo}>
           <h1>Stats</h1>
         </div>
-        {/* <div className={classes.info}>
-          <div className={classes.profile - info}></div>
-          <div className={classes.stats - info}></div>
-        </div> */}
+        <div className={classes.info}>
+          <div className={classes.profileInfo}></div>
+          <div className={classes.statsInfo}></div>
+        </div>
       </header>
     );
   }
