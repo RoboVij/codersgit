@@ -42,10 +42,13 @@ class App extends Component {
         />
         <Route
           exact
-          path="/coderstats/stats"
+          path="/coderstats/:username"
           render={(routeProps) => (
             <div className="page">
-              <Stats />
+              <Stats
+                {...routeProps}
+                username={routeProps.match.params.username}
+              />
             </div>
           )}
         />
