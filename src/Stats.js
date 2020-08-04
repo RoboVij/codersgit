@@ -7,14 +7,14 @@ const API_URL = "https://api.github.com/users/";
 class Stats extends Component {
   constructor(props) {
     super(props);
-    this.state = { userFound: null, res: null };
+    this.state = { res: null };
     this.gatherData = this.gatherData.bind(this);
   }
   componentDidMount() {
     this.gatherData();
   }
   async gatherData(evt) {
-    const { username } = this.props;
+    const { username } = this.props.match.params;
     try {
       await axios
         .get(`https://api.github.com/users/${username}`)
@@ -28,15 +28,12 @@ class Stats extends Component {
       this.setState({
         res: error.response,
       });
-      // return error.response;
     }
-
-    // this.state.userFound = res.data.message;
-    // this.setState({ userFound: userFound });
   }
 
   render() {
-    const { classes, username } = this.props;
+    const { classes } = this.props;
+    const { username } = this.props.match.params;
     const { res } = this.state;
     console.log(res);
     console.log(username);

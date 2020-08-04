@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, BrowserRouter, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
@@ -11,20 +11,18 @@ class CoderStats extends Component {
     super(props);
     this.state = { username: "" };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   handleChange(evt) {
     this.setState({
       username: evt.target.value,
     });
   }
-  handleSubmit(evt) {
-    evt.preventDefault();
-    this.props.createTodo({ ...this.state });
-    this.setState({
-      task: "",
-    });
-  }
+  handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      this.props.history.push(`/coderstats/${this.state.username}`);
+    }
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -42,9 +40,12 @@ class CoderStats extends Component {
             inputProps={{ "aria-label": "search" }}
             value={this.state.username}
             onChange={this.handleChange}
-            onK
+            onKeyPress={this.handleKeyPress}
           />
-          <Link to={`/coderstats/${this.state.username}`}>
+          <Link
+            className={classes.link}
+            to={`/coderstats/${this.state.username}`}
+          >
             <Button
               variant="contained"
               color="default"
@@ -61,4 +62,5 @@ class CoderStats extends Component {
   }
 }
 
-export default withStyles(styles)(CoderStats);
+export default withRouter(withStyles(styles)(CoderStats));
+// export default withStyles(styles)(CoderStats);

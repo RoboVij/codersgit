@@ -22,36 +22,9 @@ class App extends Component {
             </div>
           )}
         />
-        <Route
-          exact
-          path="/trending"
-          render={(routeProps) => (
-            <div className="page">
-              <Trending />
-            </div>
-          )}
-        />
-        <Route
-          exact
-          path="/coderstats"
-          render={(routeProps) => (
-            <div className="page">
-              <CoderStats />
-            </div>
-          )}
-        />
-        <Route
-          exact
-          path="/coderstats/:username"
-          render={(routeProps) => (
-            <div className="page">
-              <Stats
-                {...routeProps}
-                username={routeProps.match.params.username}
-              />
-            </div>
-          )}
-        />
+        <Route exact path="/trending" component={Trending} />
+        <Route exact path="/coderstats" component={CoderStats} />
+        <Route exact path="/coderstats/:username" component={Stats} />
       </div>
     );
     return (
