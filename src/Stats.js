@@ -3,7 +3,7 @@ import dateFormat from "dateformat";
 import { withStyles } from "@material-ui/styles";
 import styles from "./styles/StatsStyles";
 import axios from "axios";
-const API_URL = "https://api.github.com/users/";
+// const API_URL = "https://api.github.com/users/";
 
 class Stats extends Component {
   constructor(props) {
@@ -25,7 +25,11 @@ class Stats extends Component {
             res: result,
           })
         );
-      this.reposData(this.state.res.data.repos_url);
+      axios.get(this.state.res.data.repos_url).then((result) =>
+        this.setState({
+          repos: result,
+        })
+      );
     } catch (error) {
       console.log(error.response);
       this.setState({
@@ -33,13 +37,32 @@ class Stats extends Component {
       });
     }
   }
-  async reposData(url) {
-    await axios.get(url).then((result) =>
-      this.setState({
-        repos: result.data[0],
-      })
+  reposData() {
+    const stars = this.state.repos.data.reduce(
+      (acc, repo) => acc + repo.watchers,
+      0
     );
-    console.log(this.state.repos);
+    const issues = this.state.repos.data.reduce(
+      (acc, repo) => acc + repo.open_issues,
+      0
+    );
+    const forks = this.state.repos.data.reduce(
+      (acc, repo) => acc + repo.forks,
+      0
+    );
+    const languages = this.state.repos.data.reduce((acc, repo) => {
+      acc[repo.language] =
+        acc[repo.language] === undefined ? 1 : (acc[repo.language] += 1);
+      return acc;
+    }, {});
+    return (
+      <div>
+        <p>Total stars: {stars}</p>
+        <p>Total issues: {issues}</p>
+        <p>Total forks: {forks}</p>
+        <p>Main languages: {Object.keys(languages).length}</p>
+      </div>
+    );
   }
 
   render() {
@@ -47,9 +70,8 @@ class Stats extends Component {
     const { username } = this.props.match.params;
     const { res, repos } = this.state;
     console.log(res);
-    // console.log(repos);
+    console.log(repos);
     console.log(username);
-
     return (
       <header className={classes.Stats}>
         {res !== null ? (
@@ -67,23 +89,21 @@ class Stats extends Component {
                     Joined GutHub on{" "}
                     {dateFormat(res.data.created_at, "mmm d, yyyy")}
                   </p>
-                  <p>{username}</p>
-                  <p>{res.data.location}</p>
-                  <img src={res.data.avatar_url} alt="new" />
                   <a href={res.data.html_url}>{username}</a>
-                  <p>{res.data.blog}</p>
                   <p>{res.data.company}</p>
+                  <a href={res.data.blog}>{res.data.blog}</a>
+                  <p>{res.data.location}</p>
                 </div>
-                {/* {this.reposData(res.data.repos_url)} */}
+                <img
+                  className={classes.avatar}
+                  src={res.data.avatar_url}
+                  alt="new"
+                />
                 <div className={classes.statsInfo}>
-                  <p>{res.data.public_repos}</p>
-                  <p>{res.data.followers}</p>
-                  <p>{res.data.following}</p>
-                  <p>{repos.watchers}</p>
-                  {/* <p>{res.data.lang}</p>
-                  <p>{res.data.issues}</p>
-                  <p>{res.data.forks}</p>
-                  <p>{res.data.stars}</p> */}
+                  <p>Pushed to repos: {res.data.public_repos}</p>
+                  <p>Followers: {res.data.followers}</p>
+                  <p>Following: {res.data.following}</p>
+                  {repos === null ? <p>...LOADING</p> : this.reposData()}
                 </div>
               </div>
             </div>

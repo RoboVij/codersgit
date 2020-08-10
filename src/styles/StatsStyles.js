@@ -3,7 +3,7 @@ export default {
     display: "block",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "22px",
+    fontSize: "14px",
     height: "6vh",
     textAlign: "center",
   },
@@ -14,12 +14,25 @@ export default {
     // fontFamily: "Ubuntu",
     height: "100%",
     alignItems: "center",
+    marginBotttom: "25px",
     "& a": {
       textDecoration: "none",
       color: "black",
     },
   },
-  info: {},
-  profileInfo: {},
+  info: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  profileInfo: {
+    width: "15%",
+    "& a": {
+      textDecoration: "none",
+      color: "blue",
+    },
+  },
+  avatar: { width: "15%" },
   statsInfo: {},
 };
