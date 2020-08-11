@@ -1,5 +1,5 @@
 export default {
-  Stats: {
+  stats: {
     display: "block",
     alignItems: "center",
     justifyContent: "center",
@@ -27,12 +27,15 @@ export default {
     textAlign: "center",
   },
   profileInfo: {
-    width: "15%",
+    width: "45%",
+    textAlign: "right",
+    marginRight: "75px",
     "& a": {
       textDecoration: "none",
       color: "blue",
     },
   },
-  avatar: { width: "15%" },
-  statsInfo: {},
+  avatar: { width: "10%" },
+  statsInfo: { width: "45%", marginLeft: "75px", textAlign: "left" },
+  repos: { width: "97%", marginLeft: "25px" },
 };

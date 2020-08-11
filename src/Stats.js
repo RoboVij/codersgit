@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 import dateFormat from "dateformat";
 import { withStyles } from "@material-ui/styles";
+import Repositories from "./Repositories";
 import styles from "./styles/StatsStyles";
 import axios from "axios";
-// const API_URL = "https://api.github.com/users/";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import HomeIcon from "@material-ui/icons/Home";
+import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import BugReportIcon from "@material-ui/icons/BugReport";
+import CallSplitIcon from "@material-ui/icons/CallSplit";
+import StarIcon from "@material-ui/icons/Star";
+import PeopleIcon from "@material-ui/icons/People";
+import PersonIcon from "@material-ui/icons/Person";
+import GTranslateIcon from "@material-ui/icons/GTranslate";
+import InsertChartIcon from "@material-ui/icons/InsertChart";
 
 class Stats extends Component {
   constructor(props) {
@@ -57,10 +68,19 @@ class Stats extends Component {
     }, {});
     return (
       <div>
-        <p>Total stars: {stars}</p>
-        <p>Total issues: {issues}</p>
-        <p>Total forks: {forks}</p>
-        <p>Main languages: {Object.keys(languages).length}</p>
+        <p>
+          <StarIcon fontSize="small" /> Total stars: {stars}
+        </p>
+        <p>
+          <BugReportIcon fontSize="small" /> Total issues: {issues}
+        </p>
+        <p>
+          <CallSplitIcon fontSize="small" /> Total forks: {forks}
+        </p>
+        <p>
+          <GTranslateIcon fontSize="small" /> Main languages:{" "}
+          {Object.keys(languages).length}
+        </p>
       </div>
     );
   }
@@ -73,7 +93,7 @@ class Stats extends Component {
     console.log(repos);
     console.log(username);
     return (
-      <header className={classes.Stats}>
+      <header className={classes.stats}>
         {res !== null ? (
           res.status === 404 ? (
             <p>USER NOT FOUND</p>
@@ -86,13 +106,21 @@ class Stats extends Component {
                 <div className={classes.profileInfo}>
                   <p>{res.data.name === null ? username : res.data.name}</p>
                   <p>
-                    Joined GutHub on{" "}
+                    Joined GitHub on{" "}
                     {dateFormat(res.data.created_at, "mmm d, yyyy")}
                   </p>
-                  <a href={res.data.html_url}>{username}</a>
-                  <p>{res.data.company}</p>
-                  <a href={res.data.blog}>{res.data.blog}</a>
-                  <p>{res.data.location}</p>
+                  <a href={res.data.html_url}>
+                    {username} <GitHubIcon fontSize="small" />
+                  </a>
+                  <p>
+                    {res.data.company} <BusinessCenterIcon fontSize="small" />
+                  </p>
+                  <a href={res.data.blog}>
+                    {res.data.blog} <HomeIcon fontSize="small" />
+                  </a>
+                  <p>
+                    {res.data.location} <LocationOnIcon fontSize="small" />
+                  </p>
                 </div>
                 <img
                   className={classes.avatar}
@@ -100,11 +128,27 @@ class Stats extends Component {
                   alt="new"
                 />
                 <div className={classes.statsInfo}>
-                  <p>Pushed to repos: {res.data.public_repos}</p>
-                  <p>Followers: {res.data.followers}</p>
-                  <p>Following: {res.data.following}</p>
+                  <p>
+                    <InsertChartIcon fontSize="small" /> Pushed to repos:{" "}
+                    {res.data.public_repos}
+                  </p>
+                  <p>
+                    <PeopleIcon fontSize="small" /> Followers:{" "}
+                    {res.data.followers}
+                  </p>
+                  <p>
+                    <PersonIcon fontSize="small" /> Following:{" "}
+                    {res.data.following}
+                  </p>
                   {repos === null ? <p>...LOADING</p> : this.reposData()}
                 </div>
+              </div>
+              <div className={classes.repos}>
+                {repos === null ? (
+                  <p></p>
+                ) : (
+                  <Repositories repos={this.state.repos.data} />
+                )}
               </div>
             </div>
           )
