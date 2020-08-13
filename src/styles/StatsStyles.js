@@ -14,7 +14,7 @@ export default {
     // fontFamily: "Ubuntu",
     height: "100%",
     alignItems: "center",
-    marginBotttom: "25px",
+    marginBottom: "25px",
     "& a": {
       textDecoration: "none",
       color: "black",
@@ -36,6 +36,26 @@ export default {
     },
   },
   avatar: { width: "10%" },
-  statsInfo: { width: "45%", marginLeft: "75px", textAlign: "left" },
-  repos: { width: "97%", marginLeft: "25px" },
+  statsInfo: {
+    width: "45%",
+    marginLeft: "75px",
+    textAlign: "left",
+    "& a": {
+      textDecoration: "none",
+      color: "blue",
+    },
+  },
+  repos: {
+    width: "97%",
+    marginLeft: "25px",
+    "& a": {
+      textDecoration: "none",
+      color: "blue",
+    },
+  },
+  summary: {
+    width: "75%",
+    marginLeft: "13%",
+    marginBottom: "45px",
+  },
 };

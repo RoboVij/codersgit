@@ -97,7 +97,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const Repositories = (props) => {
+const LatestIssues = (props) => {
   const { classes, repos } = props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -180,7 +180,7 @@ const Repositories = (props) => {
                         scope="row"
                         padding="none"
                       >
-                        <a href={row.html_url}>{row.name}</a>
+                        {row.name}
                       </TableCell>
                       <TableCell align="right">{row.language}</TableCell>
                       <TableCell align="right">
@@ -206,4 +206,4 @@ const Repositories = (props) => {
   );
 };
 
-export default withStyles(styles)(Repositories);
+export default withStyles(styles)(LatestIssues);

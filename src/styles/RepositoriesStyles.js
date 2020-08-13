@@ -1,6 +1,10 @@
 export default {
   root: {
     width: "100%",
+    "& a": {
+      textDecoration: "none",
+      color: "blue",
+    },
   },
   paper: {
     width: "100%",

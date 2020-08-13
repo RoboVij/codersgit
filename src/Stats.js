@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import dateFormat from "dateformat";
 import { withStyles } from "@material-ui/styles";
 import Repositories from "./Repositories";
+import Issues from "./Issues";
 import styles from "./styles/StatsStyles";
 import axios from "axios";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -19,7 +20,15 @@ import InsertChartIcon from "@material-ui/icons/InsertChart";
 class Stats extends Component {
   constructor(props) {
     super(props);
-    this.state = { res: null, repos: null };
+    this.state = {
+      res: null,
+      repos: null,
+      languages: {},
+      stars: null,
+      issues: null,
+      forks: null,
+      dominantLanguage: null,
+    };
     this.gatherData = this.gatherData.bind(this);
     this.reposData = this.reposData.bind(this);
   }
@@ -29,18 +38,15 @@ class Stats extends Component {
   async gatherData(evt) {
     const { username } = this.props.match.params;
     try {
-      await axios
-        .get(`https://api.github.com/users/${username}`)
-        .then((result) =>
-          this.setState({
-            res: result,
-          })
-        );
-      axios.get(this.state.res.data.repos_url).then((result) =>
-        this.setState({
-          repos: result,
-        })
-      );
+      const res = await axios.get(`https://api.github.com/users/${username}`);
+      this.setState({
+        res: res,
+      });
+      const repos = await axios.get(res.data.repos_url);
+      this.setState({
+        repos: repos,
+      });
+      this.reposData(repos);
     } catch (error) {
       console.log(error.response);
       this.setState({
@@ -48,47 +54,42 @@ class Stats extends Component {
       });
     }
   }
-  reposData() {
-    const stars = this.state.repos.data.reduce(
-      (acc, repo) => acc + repo.watchers,
-      0
-    );
-    const issues = this.state.repos.data.reduce(
+  reposData(repos) {
+    const watchers = repos.data.reduce((acc, repo) => acc + repo.watchers, 0);
+    const open_issues = repos.data.reduce(
       (acc, repo) => acc + repo.open_issues,
       0
     );
-    const forks = this.state.repos.data.reduce(
-      (acc, repo) => acc + repo.forks,
-      0
-    );
-    const languages = this.state.repos.data.reduce((acc, repo) => {
+    const fork = repos.data.reduce((acc, repo) => acc + repo.forks, 0);
+    const lang = repos.data.reduce((acc, repo) => {
       acc[repo.language] =
         acc[repo.language] === undefined ? 1 : (acc[repo.language] += 1);
       return acc;
     }, {});
-    return (
-      <div>
-        <p>
-          <StarIcon fontSize="small" /> Total stars: {stars}
-        </p>
-        <p>
-          <BugReportIcon fontSize="small" /> Total issues: {issues}
-        </p>
-        <p>
-          <CallSplitIcon fontSize="small" /> Total forks: {forks}
-        </p>
-        <p>
-          <GTranslateIcon fontSize="small" /> Main languages:{" "}
-          {Object.keys(languages).length}
-        </p>
-      </div>
+    const maxKey = Object.keys(lang).reduce((a, b) =>
+      lang[a] > lang[b] ? a : b
     );
+    this.setState({
+      languages: lang,
+      stars: watchers,
+      issues: open_issues,
+      forks: fork,
+      dominantLanguage: maxKey,
+    });
   }
 
   render() {
     const { classes } = this.props;
     const { username } = this.props.match.params;
-    const { res, repos } = this.state;
+    const {
+      res,
+      repos,
+      stars,
+      issues,
+      forks,
+      languages,
+      dominantLanguage,
+    } = this.state;
     console.log(res);
     console.log(repos);
     console.log(username);
@@ -140,16 +141,76 @@ class Stats extends Component {
                     <PersonIcon fontSize="small" /> Following:{" "}
                     {res.data.following}
                   </p>
-                  {repos === null ? <p>...LOADING</p> : this.reposData()}
+                  {repos === null ? (
+                    <p>...LOADING</p>
+                  ) : (
+                    <div>
+                      <p>
+                        <StarIcon fontSize="small" /> Total stars: {stars}
+                      </p>
+                      <p>
+                        <BugReportIcon fontSize="small" /> Total issues:{" "}
+                        {issues}
+                      </p>
+                      <p>
+                        <CallSplitIcon fontSize="small" /> Total forks: {forks}
+                      </p>
+                      <p>
+                        <GTranslateIcon fontSize="small" /> Main languages:{" "}
+                        {Object.keys(languages).length}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className={classes.repos}>
-                {repos === null ? (
-                  <p></p>
-                ) : (
+              {repos === null ? (
+                <p>...LOADING</p>
+              ) : (
+                <div className={classes.repos}>
+                  {res.data.public_repos > 4 && (
+                    <div className={classes.summary}>
+                      <h1>Summary</h1>
+                      <p>
+                        {res.data.name === null ? username : res.data.name} has{" "}
+                        {res.data.public_repos} repositories on GitHub, the
+                        latest {res.data.public_repos}
+                        with user activity were loaded from GitHub's web service
+                        for this evaluation.{" "}
+                        {res.data.name === null ? username : res.data.name} has
+                        pushed to {res.data.public_repos} of these repositories.
+                        This is a high ratio congratulations!
+                      </p>
+                      {Object.keys(languages).length > 1 && (
+                        <p>
+                          {Object.keys(languages).length} different main
+                          languages were identified across all repos pushed to.
+                          The main language is the one with the largest amount
+                          of code in a given repository, as identified by
+                          GitHub's{" "}
+                          <a href="https://github.com/github/linguist">
+                            linguist
+                          </a>
+                          . {dominantLanguage} occurs most frequently ‒{" "}
+                          {languages[dominantLanguage]} times ‒ as the main repo
+                          language.
+                        </p>
+                      )}
+                      {forks > 9 && (
+                        <p>
+                          The total number of forks across all pushed to
+                          repositories indicates that the GitHub projects Linus
+                          Torvalds contributes to are actually used by other
+                          people.
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  <h1>Repositories</h1>
                   <Repositories repos={this.state.repos.data} />
-                )}
-              </div>
+                  {/* <Issues repos={this.state.repos.data} /> */}
+                  {/* <LatestIssues repos={this.state.repos.data} /> */}
+                </div>
+              )}
             </div>
           )
         ) : (

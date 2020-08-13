@@ -1,5 +1,3 @@
-import { fade, makeStyles } from "@material-ui/core/styles";
-
 const styles = {
   CoderStats: {
     display: "block",
