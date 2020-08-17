@@ -1,10 +1,10 @@
 export default {
   stats: {
-    display: "block",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: "14px",
-    height: "6vh",
+    // height: "6vh",
     textAlign: "center",
   },
   logo: {
@@ -48,6 +48,7 @@ export default {
   repos: {
     width: "97%",
     marginLeft: "25px",
+    marginBottom: "50px",
     "& a": {
       textDecoration: "none",
       color: "blue",

@@ -7,8 +7,8 @@ class Home extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <header className={classes.home}>
-        <h1 className={classes.logo}>coders-git.DEMO</h1>
+      <div className={classes.home}>
+        <h1 className={classes.logo}>codersgit</h1>
         <div className={classes.container}>
           <p>
             Welcome! Check out the latest news, trending repos of GitHub and
@@ -26,7 +26,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-      </header>
+      </div>
     );
   }
 }

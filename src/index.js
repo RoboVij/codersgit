@@ -3,11 +3,16 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import Footer from "./Footer";
 import * as serviceWorker from "./serviceWorker";
-
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <div id="page-container">
+      <div>
+        <App />
+      </div>
+      <Footer id="footer" />
+    </div>
   </BrowserRouter>,
   document.getElementById("root")
 );

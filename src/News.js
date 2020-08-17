@@ -4,16 +4,18 @@ import { withStyles } from "@material-ui/styles";
 import styles from "./styles/NewsStyles";
 
 class News extends Component {
+  componentDidMount() {
+    document.title = "codersgit | News";
+  }
   render() {
     const { classes } = this.props;
     return (
-      // <nav className={classes.nav}>
-      //     <h1 className={classes.heading}>React Colors</h1>
-      //     <Link to="/palette/new">Create Palette</Link>
-      //   </nav>
       <header className={classes.News}>
         <div className={classes.logo}>
-          <h1>NEWS</h1>
+          <h1>Work In Progress</h1>
+          <Link className={classes.link} to="/coderstats">
+            Want to see something?
+          </Link>
         </div>
       </header>
     );

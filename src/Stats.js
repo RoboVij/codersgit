@@ -46,7 +46,9 @@ class Stats extends Component {
       this.setState({
         repos: repos,
       });
-      this.reposData(repos);
+      if (repos.data.length > 0) {
+        this.reposData(repos);
+      }
     } catch (error) {
       console.log(error.response);
       this.setState({
@@ -94,7 +96,7 @@ class Stats extends Component {
     console.log(repos);
     console.log(username);
     return (
-      <header className={classes.stats}>
+      <div className={classes.stats}>
         {res !== null ? (
           res.status === 404 ? (
             <p>USER NOT FOUND</p>
@@ -114,13 +116,32 @@ class Stats extends Component {
                     {username} <GitHubIcon fontSize="small" />
                   </a>
                   <p>
-                    {res.data.company} <BusinessCenterIcon fontSize="small" />
+                    {res.data.company === null ? (
+                      []
+                    ) : (
+                      <p>
+                        {res.data.company}{" "}
+                        <BusinessCenterIcon fontSize="small" />
+                      </p>
+                    )}
                   </p>
                   <a href={res.data.blog}>
-                    {res.data.blog} <HomeIcon fontSize="small" />
+                    {res.data.blog === "" ? (
+                      []
+                    ) : (
+                      <p>
+                        {res.data.blog} <HomeIcon fontSize="small" />
+                      </p>
+                    )}
                   </a>
                   <p>
-                    {res.data.location} <LocationOnIcon fontSize="small" />
+                    {res.data.location === null ? (
+                      []
+                    ) : (
+                      <p>
+                        {res.data.location} <LocationOnIcon fontSize="small" />
+                      </p>
+                    )}
                   </p>
                 </div>
                 <img
@@ -143,6 +164,8 @@ class Stats extends Component {
                   </p>
                   {repos === null ? (
                     <p>...LOADING</p>
+                  ) : repos.data.length < 1 ? (
+                    []
                   ) : (
                     <div>
                       <p>
@@ -165,6 +188,8 @@ class Stats extends Component {
               </div>
               {repos === null ? (
                 <p>...LOADING</p>
+              ) : repos.data.length < 1 ? (
+                []
               ) : (
                 <div className={classes.repos}>
                   {res.data.public_repos > 4 && (
@@ -216,7 +241,7 @@ class Stats extends Component {
         ) : (
           <p>...LOADING</p>
         )}
-      </header>
+      </div>
     );
   }
 }

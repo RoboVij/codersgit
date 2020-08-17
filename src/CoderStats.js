@@ -13,6 +13,9 @@ class CoderStats extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
+  componentDidMount() {
+    document.title = "codersgit | CoderStats";
+  }
   handleChange(evt) {
     this.setState({
       username: evt.target.value,
@@ -26,7 +29,7 @@ class CoderStats extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <header className={classes.CoderStats}>
+      <div className={classes.CoderStats}>
         <div className={classes.logo}>
           <h1>CoderStats</h1>
         </div>
@@ -57,7 +60,7 @@ class CoderStats extends Component {
             </Button>
           </Link>
         </div>
-      </header>
+      </div>
     );
   }
 }

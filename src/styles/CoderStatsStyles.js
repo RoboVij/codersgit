@@ -4,7 +4,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: "22px",
-    height: "6vh",
+    // height: "6vh",
     textAlign: "center",
   },
   logo: {

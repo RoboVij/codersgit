@@ -9,7 +9,7 @@ export default {
   navitem: {
     marginRight: "15px",
     padding: "0 13px",
-    fontSize: "22px",
+    fontSize: "14px",
     // fontFamily: "Roboto",
     height: "100%",
     display: "flex",

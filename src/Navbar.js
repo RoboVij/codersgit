@@ -14,7 +14,7 @@ class Navbar extends Component {
       <header className={classes.Navbar}>
         <div className={classes.navitem}>
           <Link to="/" className={classes.logo}>
-            coders-git.DEMO
+            codersgit
           </Link>
         </div>
         <div className={classes.navitem}>
