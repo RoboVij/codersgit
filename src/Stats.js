@@ -223,8 +223,7 @@ class Stats extends Component {
                       {forks > 9 && (
                         <p>
                           The total number of forks across all pushed to
-                          repositories indicates that the GitHub projects Linus
-                          Torvalds contributes to are actually used by other
+                          repositories indicates that the GitHub projects {res.data.name === null ? username : res.data.name} contributes to are actually used by other
                           people.
                         </p>
                       )}
