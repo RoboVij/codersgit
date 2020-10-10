@@ -8,10 +8,8 @@ export default {
     textAlign: "center",
   },
   logo: {
-    fontFamily: "Courier New",
     marginTop: "150px",
     fontSize: "16px",
-    fontFamily: "Ubuntu",
     height: "100%",
     alignItems: "center",
     "& a": {
