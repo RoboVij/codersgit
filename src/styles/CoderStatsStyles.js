@@ -54,7 +54,7 @@ const styles = {
     paddingLeft: "30px",
     width: "700px",
     textAlign: "center",
-    fontSize: "30px",
+    fontSize: "20px",
     fontFamily: "Ubuntu",
   },
 };
