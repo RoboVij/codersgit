@@ -35,7 +35,7 @@ class CoderStats extends Component {
         </div>
         <div className={classes.search}>
           <InputBase
-            placeholder="GitHub user name or organisation"
+            placeholder="GitHub user name or organisation e.g. RoboVij"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
