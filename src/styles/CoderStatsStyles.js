@@ -41,7 +41,6 @@ const styles = {
   button: {
     width: "150px",
     height: "40%",
-    fontFamily: "Ubuntu",
     position: "relative",
     left: "7%",
     top: "50%",
@@ -55,7 +54,6 @@ const styles = {
     width: "700px",
     textAlign: "center",
     fontSize: "20px",
-    fontFamily: "Ubuntu",
   },
 };
 
