@@ -1,4 +1,4 @@
-# Project Name
+# codersgit website
  A demo website which provides the following services:
 - GitHub coder/user statistics organised and displayed at one place
 - Latest GitHub news
