@@ -1,3 +1,29 @@
+# Project Name
+ A demo website which provides the following services:
+- GitHub coder/user statistics organised and displayed at one place
+- Latest GitHub news
+- Trending GitHub repositories
+
+# Technologies
+* ReactJS
+* JavaScript
+* CSS
+* HTML
+* Rest API
+* Material-UI (React UI framework)
+
+# Features
+List of features ready and TODOs for future development
+* GitHub coder/user statistics organised and displayed at one place
+
+To-do list:
+* Latest GitHub news
+* Trending GitHub repositories
+
+# Status
+Project is: _in progress_
+
+# Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
